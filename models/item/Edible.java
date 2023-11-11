@@ -17,6 +17,7 @@ public class Edible extends Item {
         // remove from inventory
     }
 
+    @Override
     public String getInfo() {
         return super.getInfo() + "\nRestores " + getHealthPoints() + " hp";
     }

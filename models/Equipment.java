@@ -85,7 +85,38 @@ public class Equipment {
                 "weapon: " + (weapon == null ? "empty" : weapon.getName()) + '\n';
     }
 
-    public Item wearItem(Item newItem) {
+    public Item wearItem(Item newItem){
+
+        Item oldItem;
+        
+        if(newItem instanceof Helmet){
+            oldItem = helmet;
+            setHelmet((Helmet) newItem);
+        } 
+        else if(newItem instanceof Chest){
+            oldItem = chest;
+            setChest((Chest) newItem);
+        }
+        else if(newItem instanceof Legs){
+            oldItem = legs;
+            setLegs((Legs) newItem);
+        }
+        else if(newItem instanceof Boots){
+            oldItem = boots;
+            setBoots((Boots) newItem);
+        }
+        else if(newItem instanceof Weapon){
+            oldItem = weapon;
+            setWeapon((Weapon) newItem);
+        } else {
+            System.out.println("Invalid item class: " + newItem.getClass().getSimpleName());
+            return null;
+        }
+        System.out.println(newItem.getName() + " equipped.");
+        return oldItem;
+    }
+    
+    public Item wearItem2(Item newItem) {
 
         String itemClassName = newItem.getClass().getSimpleName();
         Item oldItem;

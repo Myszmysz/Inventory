@@ -31,9 +31,9 @@ public class Storage {
         return items;
     }
 
-    public String addItem(Item item) {
+    public void addItem(Item item) {
         getItems().add(item);
-        return item.getName() + " added to inventory.";
+        System.out.println(item.getName() + " added to inventory.");
     }
 
     private int getNumberOfItems() {
@@ -69,6 +69,7 @@ public class Storage {
      * 1 - basic info
      * 2 - basic info with list of items
      * 3 - basic info with extended list of item
+     * 4 - basic info with fully extended list of item
      */
     public String getInfo(int range) {
         StringBuilder info = new StringBuilder();
@@ -85,6 +86,15 @@ public class Storage {
                 info.append(getListOfItems());
             }
             case 3 -> {
+                info.append(getInfo(1));
+                info.append("items:\n\n");
+
+                for (Item item : getItems()) {
+                    info.append(item.getInfo());
+                    info.append("\n\n");
+                }
+            }
+            case 4 -> {
                 info.append(getInfo(1));
                 info.append("items:\n\n");
 

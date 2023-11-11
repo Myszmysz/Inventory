@@ -34,6 +34,7 @@ public class Inventory {
 
     }
 
+    //TODO: use takeOff in method
     public void wearItem(Item newItem) {
 
         //TODO Static member 'models.Storage.getItems()' accessed via instance reference
@@ -43,7 +44,7 @@ public class Inventory {
             if (newItem instanceof Armor || newItem instanceof Weapon) {
                 if (storage.removeItem(newItem)) {
                     Item oldItem = equipment.wearItem(newItem);
-                    if (oldItem != null) System.out.println(storage.addItem(oldItem));
+                    if (oldItem != null) storage.addItem(oldItem);
                 }
             } else
                 System.out.println("Invalid type of item: " + newItem.getName() + " (" + newItem.getClass().getSimpleName() + ")");
