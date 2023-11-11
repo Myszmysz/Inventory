@@ -1,11 +1,9 @@
-package models;
+package models.item;
 
 import java.util.EnumSet;
 
 public class Weapon extends Item {
 
-    private final Purpose purpose = Purpose.WEAPON;
-    EnumSet<Purpose> weaponPurpose = EnumSet.of(Purpose.WEAPON);
     private int damagePoints;
     private int durability;
 
@@ -37,7 +35,4 @@ public class Weapon extends Item {
         return super.getInfo() + "\nDP: " + damagePoints + "\ndurability: " + durability;
     }
 
-    public Purpose getPurpose() {
-        return purpose;
-    }
 }

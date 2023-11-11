@@ -1,4 +1,6 @@
-package models;
+package models.item;
+
+import models.item.Item;
 
 public class Edible extends Item {
 
@@ -15,7 +17,6 @@ public class Edible extends Item {
         // remove from inventory
     }
 
-    @Override
     public String getInfo() {
         return super.getInfo() + "\nRestores " + getHealthPoints() + " hp";
     }

@@ -1,174 +1,142 @@
 package models;
 
+import models.item.Item;
+import models.item.Weapon;
+import models.item.armor.Boots;
+import models.item.armor.Chest;
+import models.item.armor.Helmet;
+import models.item.armor.Legs;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Equipment {
 
-    private static Armor helmet;
-    private static Armor chest;
-    private static Armor legs;
-    private static Armor boots;
+    private static Helmet helmet;
+    private static Chest chest;
+    private static Legs legs;
+    private static Boots boots;
     private static Weapon weapon;
-
-    private Map<Purpose, Item> equipmentItems = getEquipmentItems();
-
-
-    public Equipment(Armor helmet, Armor armor, Armor legs, Armor boots, Weapon weapon) {
-        this.setHelmet(helmet);
-        this.setChest(armor);
-        this.setLegs(legs);
-        this.setBoots(boots);
-        this.setWeapon(weapon);
-    }
 
     public Equipment() {
 
     }
 
-    public Map<Purpose, Item> getEquipmentItems() {
+    public static Helmet getHelmet() {
+        return helmet;
+    }
 
-        Map<Purpose, Item> equipment = new HashMap<>();
-        equipment.put(Purpose.HELMET, getHelmet());
-        equipment.put(Purpose.CHEST, getChest());
-        equipment.put(Purpose.LEGS, getLegs());
-        equipment.put(Purpose.BOOTS, getBoots());
-        equipment.put(Purpose.WEAPON, getWeapon());
+    public static void setHelmet(Helmet helmet) {
+        Equipment.helmet = helmet;
+    }
 
-        return equipment;
+    public static Chest getChest() {
+        return chest;
+    }
+
+    public static void setChest(Chest chest) {
+        Equipment.chest = chest;
+    }
+
+    public static Legs getLegs() {
+        return legs;
+    }
+
+    public static void setLegs(Legs legs) {
+        Equipment.legs = legs;
+    }
+
+    public static Boots getBoots() {
+        return boots;
+    }
+
+    public static void setBoots(Boots boots) {
+        Equipment.boots = boots;
+    }
+
+    public static Weapon getWeapon() {
+        return weapon;
+    }
+
+    public static void setWeapon(Weapon weapon) {
+        Equipment.weapon = weapon;
     }
 
     public List<Item> getItems() {
 
         List<Item> listOfItems = new ArrayList<>();
 
-        listOfItems.add(helmet);
-        listOfItems.add(chest);
-        listOfItems.add(legs);
-        listOfItems.add(boots);
-        listOfItems.add(weapon);
+        listOfItems.add(getHelmet());
+        listOfItems.add(getChest());
+        listOfItems.add(getLegs());
+        listOfItems.add(getBoots());
+        listOfItems.add(getWeapon());
 
         return listOfItems;
     }
 
     public String getInfo() {
-        return String.format("""
-                Equipment
-                helmet: %s
-                chest: %s
-                legs: %s
-                boots: %s
-                weapon: %s
-                """, getItemName(getEquipmentItems().get(Purpose.HELMET)), getItemName(getEquipmentItems().get(Purpose.CHEST)), getItemName(getEquipmentItems().get(Purpose.LEGS)), getItemName(getEquipmentItems().get(Purpose.BOOTS)), getItemName(getEquipmentItems().get(Purpose.WEAPON))
 
-        );
+        return "Equipment\n" +
+                "helmet: " + (helmet == null ? "empty" : helmet.getName()) + '\n' +
+                "chest: " + (chest == null ? "empty" : chest.getName()) + '\n' +
+                "legs: " + (legs == null ? "empty" : legs.getName()) + '\n' +
+                "boots: " + (boots == null ? "empty" : boots.getName()) + '\n' +
+                "weapon: " + (weapon == null ? "empty" : weapon.getName()) + '\n';
     }
 
-    private String getItemName(Item item) {
-        if (item != null) {
-            return item.getName();
-        } else return "empty";
-    }
+    public Item wearItem(Item newItem) {
 
-    public Armor getHelmet() {
-        return helmet;
-    }
+        String itemClassName = newItem.getClass().getSimpleName();
+        Item oldItem;
 
-    private void setHelmet(Armor helmet) {
-        this.helmet = helmet;
-        equipmentItems.replace(Purpose.HELMET, helmet);
-    }
-
-    public Armor getChest() {
-        return chest;
-    }
-
-    private void setChest(Armor chest) {
-        this.chest = chest;
-        equipmentItems.replace(Purpose.CHEST, chest);
-    }
-
-    public Armor getLegs() {
-        return legs;
-    }
-
-    private void setLegs(Armor legs) {
-        this.legs = legs;
-        equipmentItems.replace(Purpose.LEGS, legs);
-    }
-
-    public Armor getBoots() {
-        return boots;
-    }
-
-    private void setBoots(Armor boots) {
-        this.boots = boots;
-        equipmentItems.replace(Purpose.BOOTS, boots);
-    }
-
-    public Weapon getWeapon() {
-        return weapon;
-    }
-
-    private void setWeapon(Weapon weapon) {
-        this.weapon = weapon;
-        equipmentItems.replace(Purpose.WEAPON, weapon);
-    }
-
-
-    public Item wearItem(Item item) {
-        if (item.getClass().equals(Armor.class)) {
-            return replaceItem(item, ((Armor) item).getPurpose());
-        } else if (item.getClass().equals(Weapon.class)) {
-            return replaceItem(item, ((Weapon) item).getPurpose());
-        }
-        System.out.println("Unable to wear: " + item.getName());
-        return null;
-    }
-
-    public Item takeOffItem(Item item) {
-        if (item.getClass().equals(Armor.class)) {
-            return replaceItem(null, ((Armor) item).getPurpose());
-        } else if (item.getClass().equals(Weapon.class)) {
-            return replaceItem(null, ((Weapon) item).getPurpose());
-        }
-        System.out.println("Unable to wear: " + item.getName());
-        return null;
-    }
-
-    private Item replaceItem(Item item, Purpose purpose) {
-        switch (purpose) {
-            case HELMET -> {
-                setHelmet((Armor) item);
-                return equipmentItems.replace(purpose, item);
+        switch (itemClassName) {
+            case "Helmet" -> {
+                oldItem = helmet;
+                setHelmet((Helmet) newItem);
             }
-            case CHEST -> {
-                setChest((Armor) item);
-                return equipmentItems.replace(purpose, item);
+            case "Chest" -> {
+                oldItem = chest;
+                setChest((Chest) newItem);
             }
-            case LEGS -> {
-                setLegs((Armor) item);
-                return equipmentItems.replace(purpose, item);
+            case "Legs" -> {
+                oldItem = legs;
+                setLegs((Legs) newItem);
             }
-            case BOOTS -> {
-                setBoots((Armor) item);
-                return equipmentItems.replace(purpose, item);
+            case "Boots" -> {
+                oldItem = boots;
+                setBoots((Boots) newItem);
             }
-            case WEAPON -> {
-                setWeapon((Weapon) item);
-                return equipmentItems.replace(purpose, item);
+            case "Weapon" -> {
+                oldItem = weapon;
+                setWeapon((Weapon) newItem);
+            }
+            default -> {
+                System.out.println("Invalid item class: " + itemClassName);
+                return null;
             }
         }
-        return null;
+        System.out.println(newItem.getName() + " equipped.");
+        return oldItem;
     }
 
-    private Item replaceItem(Armor item) {
-        return replaceItem(item, item.getPurpose());
+    public boolean takeOffItem(Item item) {
+
+        String itemClassName = item.getClass().getSimpleName();
+
+        switch (itemClassName) {
+            case "Helmet" -> setHelmet(null);
+            case "Chest" -> setChest(null);
+            case "Legs" -> setLegs(null);
+            case "Boots" -> setBoots(null);
+            case "Weapon" -> setWeapon(null);
+            default -> {
+                System.out.println("Invalid item class name: " + itemClassName);
+                return false;
+            }
+        }
+        System.out.println(item.getName() + " taken off.");
+        return true;
     }
 
-    private Item replaceItem(Weapon item) {
-        return replaceItem(item, item.getPurpose());
-    }
 }

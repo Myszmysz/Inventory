@@ -1,27 +1,19 @@
-package models;
+package models.item;
 
-public class Item {
+public abstract class Item {
 
-    // boolean isWearable
     private String name;
     private int value;
     private double weight;
 
     public Item(String name, int value, double weight) {
-        this.name = name;
-        this.value = value;
-        this.weight = weight;
+        this.setName(name);
+        this.setValue(value);
+        this.setWeight(weight);
     }
-
-    public void sellItem() {
-        //TODO
-    }
-
-    ;
-
 
     public String getInfo() {
-        return "name: " + name + "\nvalue: " + value + "\nweight: " + weight;
+        return "name: " + getName() + "\nvalue: " + getValue() + "\nweight: " + getWeight();
     }
 
     public String getName() {

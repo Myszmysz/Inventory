@@ -1,5 +1,7 @@
 package models;
 
+import models.item.Item;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,21 +10,30 @@ public class Storage {
     private static final List<Item> items = new ArrayList<>();
     private int money;
 
+    //TODO: in new object money should always be 0;
+
     public Storage() {
 
     }
 
+    // TODO: change type to boolean
     public static boolean removeItem(Item item) {
-        return getItems().remove(item);
+        boolean result = getItems().remove(item);
+
+        System.out.println(result
+                ? item.getName() + " removed from storage."
+                : "Failed to remove" + item.getName() + " from storage.");
+
+        return result;
     }
 
     public static List<Item> getItems() {
         return items;
     }
 
-    public void addItem(Item item) {
+    public String addItem(Item item) {
         getItems().add(item);
-        System.out.println(item.getName() + " added to inventory.");
+        return item.getName() + " added to inventory.";
     }
 
     private int getNumberOfItems() {
@@ -39,37 +50,55 @@ public class Storage {
 
     public String getListOfItems() {
         StringBuilder listOfItems = new StringBuilder();
+        int i = 1;
+
         listOfItems.append("\nStorage:\n");
         for (Item item : getItems()) {
-            listOfItems.append(item.getName());
+            listOfItems.append(i).append(". ").append(item.getName());
             listOfItems.append("\n");
+            i++;
         }
         return listOfItems.toString();
     }
 
     public String getInfo() {
-        StringBuilder listOfItems = new StringBuilder();
+        return getInfo(1);
+    }
 
-        listOfItems.append(String.format("""
-                Number of items: %s
-                Money: %s coins
-                Total weight: %s
-                """, getNumberOfItems(), getMoney(), getTotalWeight()));
+    /**
+     * 1 - basic info
+     * 2 - basic info with list of items
+     * 3 - basic info with extended list of item
+     */
+    public String getInfo(int range) {
+        StringBuilder info = new StringBuilder();
 
-        listOfItems.append("items:\n");
+        switch (range) {
+            case 1 -> info.append(String.format("""
+                                        
+                    Number of items: %s
+                    Money: %s coins
+                    Total weight: %s
+                    """, getNumberOfItems(), money, getTotalWeight()));
+            case 2 -> {
+                info.append(getInfo(1));
+                info.append(getListOfItems());
+            }
+            case 3 -> {
+                info.append(getInfo(1));
+                info.append("items:\n\n");
 
-        for (Item item : getItems()) {
-            listOfItems.append(item.getInfo());
-            listOfItems.append("\n\n");
+                for (Item item : getItems()) {
+                    info.append(item.getInfo());
+                    info.append("\n\n");
+                }
+            }
         }
-        return listOfItems.toString();
+
+        return info.toString();
     }
 
-    public int getMoney() {
-        return money;
-    }
-
-    public void setMoney(int money) {
-        this.money = money;
+    public void addMoney(int money) {
+        this.money += money;
     }
 }
