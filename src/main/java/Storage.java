@@ -1,26 +1,22 @@
 import item.Item;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-// TODO czy storage nie powinno być interface?
 // TODO: zrobić metody ze storage możliwe do wywołania tylko z inventory
 public class Storage {
 
   private static final Logger logger = LoggerFactory.getLogger(Storage.class);
-
-  private static final List<Item> items = new ArrayList<>();
-
+  private final List<Item> items;
   private int money;
 
-  // TODO: in new object money should always be 0;
+  public Storage() {
+    money = 0;
+    items = new ArrayList<>();
+  }
 
-  public Storage() {}
-
-  public static List<Item> getItems() {
+  public List<Item> getItems() {
     return items;
   }
 

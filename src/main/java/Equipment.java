@@ -4,64 +4,65 @@ import item.armor.Boots;
 import item.armor.Chest;
 import item.armor.Helmet;
 import item.armor.Legs;
+import java.util.ArrayList;
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.List;
-
-// TODO czy equipment nie powinno być interface?
 // TODO: zrobić metody z equipment możliwe do wywołania tylko z inventory
 public class Equipment {
 
   private static final Logger logger = LoggerFactory.getLogger(Equipment.class);
 
-  private static Helmet helmet;
-  private static Chest chest;
-  private static Legs legs;
-  private static Boots boots;
-  private static Weapon weapon;
+  int healthPoints;
+  int protectionPoint;
+
+  private Helmet helmet;
+  private Chest chest;
+  private Legs legs;
+  private Boots boots;
+  private Weapon weapon;
 
   public Equipment() {}
 
-  public static Helmet getHelmet() {
+  public Helmet getHelmet() {
     return helmet;
   }
 
-  public static void setHelmet(Helmet helmet) {
-    Equipment.helmet = helmet;
+  public void setHelmet(Helmet helmet) {
+    this.helmet = helmet;
   }
 
-  public static Chest getChest() {
+  public Chest getChest() {
     return chest;
   }
 
-  public static void setChest(Chest chest) {
-    Equipment.chest = chest;
+  public void setChest(Chest chest) {
+    this.chest = chest;
   }
 
-  public static Legs getLegs() {
+  public Legs getLegs() {
     return legs;
   }
 
-  public static void setLegs(Legs legs) {
-    Equipment.legs = legs;
+  public void setLegs(Legs legs) {
+    this.legs = legs;
   }
 
-  public static Boots getBoots() {
+  public Boots getBoots() {
     return boots;
   }
 
-  public static void setBoots(Boots boots) {
-    Equipment.boots = boots;
+  public void setBoots(Boots boots) {
+    this.boots = boots;
   }
 
-  public static Weapon getWeapon() {
+  public Weapon getWeapon() {
     return weapon;
   }
 
-  public static void setWeapon(Weapon weapon) {
-    Equipment.weapon = weapon;
+  public void setWeapon(Weapon weapon) {
+    this.weapon = weapon;
   }
 
   public List<Item> getItems() {
@@ -120,7 +121,7 @@ public class Equipment {
       logger.error("Illegal class of item: " + newItem.getClass().getSimpleName());
       return null;
     }
-   logger.info(newItem.getName() + " equipped.");
+    logger.info(newItem.getName() + " equipped.");
     return oldItem;
   }
 

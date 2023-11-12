@@ -13,8 +13,9 @@ public class App {
 
   public static void main(String[] args) {
 
-    // logger.debug("UserService Test");
-    // TODO: replace sout for logging
+    //TODO: damage, armor parameters
+    //TODO: durability function
+    //TODO: money functions
 
     Edible apple = new Edible("Apple", 2, 0.5, 10);
     Edible broccoli = new Edible("Broccoli", 5, 2, 20);

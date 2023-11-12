@@ -4,23 +4,19 @@ import item.Item;
 
 public abstract class Armor extends Item {
 
-  private int protectionPoints;
+  private final int armorPoints;
 
-  public Armor(String name, int value, double weight, int protectionPoints) {
+  public Armor(String name, int value, double weight, int armorPoints) {
     super(name, value, weight);
-    this.setProtectionPoints(protectionPoints);
+    this.armorPoints = armorPoints;
   }
 
   @Override
   public String getInfo() {
-    return super.getInfo() + "\nPP: " + getProtectionPoints();
+    return super.getInfo() + "\narmor: " + getArmorPoints();
   }
 
-  public int getProtectionPoints() {
-    return protectionPoints;
-  }
-
-  public void setProtectionPoints(int protectionPoints) {
-    this.protectionPoints = protectionPoints;
+  public int getArmorPoints() {
+    return armorPoints;
   }
 }
