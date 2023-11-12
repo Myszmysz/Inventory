@@ -1,6 +1,7 @@
-import item.Edible;
-import item.Weapon;
-import item.armor.*;
+import items.armors.Armor;
+import items.Edible;
+import items.Weapon;
+import items.armors.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,9 +11,9 @@ public class App {
 
   public static void main(String[] args) {
 
-    //TODO: damage, armor parameters
-    //TODO: durability function
-    //TODO: money functions
+    // TODO: damage, armor parameters
+    // TODO: durability function
+    // TODO: money functions
 
     Edible apple = new Edible("Apple", 2, 0.5, 10);
     Edible broccoli = new Edible("Broccoli", 5, 2, 20);
@@ -44,9 +45,8 @@ public class App {
     System.out.println(inventory.storage.getInfo(3));
     System.out.println(inventory.equipment.getInfo(2));
 
-
-    // TODO: dopytać to ten przypadek: czy da się wywołać getInfo z Item zamiast z Edible.
-    // Item a = new Edible("a",1,1,1); // upcasting
+    // TODO: dopytać to ten przypadek: czy da się wywołać getInfo z items.Item zamiast z Edible.
+    // items.Item a = new Edible("a",1,1,1); // upcasting
     // Edible b = new Edible("b",2,2,2);
     // System.out.println(a.getInfo());
     // System.out.println(b.getInfo());

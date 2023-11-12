@@ -1,9 +1,9 @@
-package item;
+package items;
 
 public class Weapon extends Item {
 
   private final int damagePoints;
-  private int durability;
+  private final int durability;
 
   public Weapon(String name, int value, double weight, int damagePoints) {
     super(name, value, weight);

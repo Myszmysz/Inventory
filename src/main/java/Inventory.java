@@ -1,6 +1,6 @@
-import item.Item;
-import item.Weapon;
-import item.armor.Armor;
+import items.Item;
+import items.Weapon;
+import items.armors.Armor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,7 +10,6 @@ public class Inventory {
 
   Storage storage = new Storage();
   Equipment equipment = new Equipment();
-
 
   public Inventory() {}
 

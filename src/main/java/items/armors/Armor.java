@@ -1,11 +1,11 @@
-package item.armor;
+package items.armors;
 
-import item.Item;
+import items.Item;
 
 public abstract class Armor extends Item {
 
   private final int armorPoints;
-  private int durability;
+  private final int durability;
 
   public Armor(String name, int value, double weight, int armorPoints) {
     super(name, value, weight);

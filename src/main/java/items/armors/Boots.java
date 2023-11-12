@@ -1,4 +1,4 @@
-package item.armor;
+package items.armors;
 
 public class Boots extends Armor {
 

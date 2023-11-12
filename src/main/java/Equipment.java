@@ -1,6 +1,7 @@
-import item.Item;
-import item.Weapon;
-import item.armor.*;
+import items.Item;
+import items.Weapon;
+import items.armors.*;
+import items.armors.Armor;
 import java.util.ArrayList;
 import java.util.List;
 import org.slf4j.Logger;
