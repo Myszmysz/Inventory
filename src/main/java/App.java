@@ -1,11 +1,9 @@
-package models;
-
-import models.item.Edible;
-import models.item.Weapon;
-import models.item.armor.Armor;
-import models.item.armor.Boots;
-import models.item.armor.Chest;
-import models.item.armor.Helmet;
+import item.Edible;
+import item.Weapon;
+import item.armor.Armor;
+import item.armor.Boots;
+import item.armor.Chest;
+import item.armor.Helmet;
 
 public class App {
 
@@ -23,8 +21,7 @@ public class App {
         Armor shirt = new Chest("Shirt", 35, 0.7, 15);
         Armor socks = new Boots("Socks not in inventory", 35, 0.2, 10);
 
-        //Inventory inventory = new Inventory();
-        //inventory.addToStorage(apple);
+
         //inventory.addToStorage(broccoli);
         //inventory.addToStorage(sword);
         //inventory.addToStorage(stick);
@@ -32,9 +29,11 @@ public class App {
         //inventory.addToStorage(cap);
         //inventory.addToStorage(shirt);
 //
+        //Inventory inventory = new Inventory();
+        //inventory.addToStorage(apple);
         //inventory.wearItem(hat);
-//
         //System.out.println(inventory.storage.getInfo(2));
+
         //System.out.println(inventory.equipment.getInfo());
 //
         //inventory.wearItem(cap);

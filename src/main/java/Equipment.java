@@ -1,11 +1,9 @@
-package models;
-
-import models.item.Item;
-import models.item.Weapon;
-import models.item.armor.Boots;
-import models.item.armor.Chest;
-import models.item.armor.Helmet;
-import models.item.armor.Legs;
+import item.Item;
+import item.Weapon;
+import item.armor.Boots;
+import item.armor.Chest;
+import item.armor.Helmet;
+import item.armor.Legs;
 
 import java.util.ArrayList;
 import java.util.List;
