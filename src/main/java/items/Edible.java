@@ -1,24 +1,20 @@
-package item;
+package items;
 
 public class Edible extends Item {
 
-  private int healthPoints;
+  private final int healthPoints;
 
   public Edible(String name, int value, double weight, int healthPoints) {
     super(name, value, weight);
-    this.setHealthPoints(healthPoints);
+    this.healthPoints = healthPoints;
   }
 
   @Override
   public String getInfo() {
-    return super.getInfo() + "\nRestores " + getHealthPoints() + " hp";
+    return super.getInfo() + "\nRestores " + getHealthPoints() + " points of health.";
   }
 
   public int getHealthPoints() {
     return healthPoints;
-  }
-
-  public void setHealthPoints(int healthPoints) {
-    this.healthPoints = healthPoints;
   }
 }

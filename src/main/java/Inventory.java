@@ -1,6 +1,6 @@
-import item.Item;
-import item.Weapon;
-import item.armor.Armor;
+import items.Item;
+import items.Weapon;
+import items.armors.Armor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,16 +11,13 @@ public class Inventory {
   Storage storage = new Storage();
   Equipment equipment = new Equipment();
 
-  int healthPoints;
-  int protectionPoint;
-
   public Inventory() {}
 
   public void sellItem(Item item) {
 
     boolean success = false;
 
-    if (Storage.getItems().contains(item)) {
+    if (storage.getItems().contains(item)) {
       success = storage.removeItem(item);
     } else if (equipment.getItems().contains(item)) {
       success = equipment.takeOffItem(item);
@@ -35,8 +32,7 @@ public class Inventory {
   // TODO: use takeOff in method
   public void wearItem(Item newItem) {
 
-    // TODO Static member 'models.Storage.getItems()' accessed via instance reference
-    if (Storage.getItems().contains(newItem)) {
+    if (storage.getItems().contains(newItem)) {
 
       // only armor and weapon can be worn
       if (newItem instanceof Armor || newItem instanceof Weapon) {
