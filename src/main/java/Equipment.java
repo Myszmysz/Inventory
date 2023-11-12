@@ -1,9 +1,6 @@
 import item.Item;
 import item.Weapon;
-import item.armor.Boots;
-import item.armor.Chest;
-import item.armor.Helmet;
-import item.armor.Legs;
+import item.armor.*;
 import java.util.ArrayList;
 import java.util.List;
 import org.slf4j.Logger;
@@ -14,9 +11,7 @@ public class Equipment {
 
   private static final Logger logger = LoggerFactory.getLogger(Equipment.class);
 
-  int healthPoints;
-  int protectionPoint;
-
+  int totalArmorPoints;
   private Helmet helmet;
   private Chest chest;
   private Legs legs;
@@ -24,6 +19,13 @@ public class Equipment {
   private Weapon weapon;
 
   public Equipment() {}
+
+  public int getTotalArmorPoints() {
+    for (Item item : getItems()) {
+      if (item instanceof Armor) totalArmorPoints += ((Armor) item).getArmorPoints();
+    }
+    return totalArmorPoints;
+  }
 
   public Helmet getHelmet() {
     return helmet;
@@ -78,7 +80,7 @@ public class Equipment {
     return listOfItems;
   }
 
-  public String getInfo() {
+  private String getInfo() {
 
     return "Equipment\n"
         + "helmet: "
@@ -96,6 +98,27 @@ public class Equipment {
         + "weapon: "
         + (weapon == null ? "empty" : weapon.getName())
         + '\n';
+  }
+
+  /** 1 - basic info 2 - basic info with list of items 3 - basic info with extended list of item */
+  public String getInfo(int range) {
+    StringBuilder info = new StringBuilder();
+
+    switch (range) {
+      case 1 -> info.append(getInfo());
+      case 2 -> {
+        info.append("Total armor points: ").append(getTotalArmorPoints()).append("\n");
+        info.append(getInfo(1));
+      }
+      case 3 -> {
+        for (Item item : getItems()) {
+          info.append(item.getInfo());
+          info.append("\n\n");
+        }
+      }
+    }
+
+    return info.toString();
   }
 
   public Item wearItem(Item newItem) {

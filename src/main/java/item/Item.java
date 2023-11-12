@@ -2,6 +2,8 @@ package item;
 
 public abstract class Item {
 
+  public static final int MAX_DURABILITY = 100;
+
   private final String name;
   private final int value;
   private final double weight;

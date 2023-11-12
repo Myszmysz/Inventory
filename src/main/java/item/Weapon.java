@@ -3,12 +3,12 @@ package item;
 public class Weapon extends Item {
 
   private final int damagePoints;
-  private final int durability;
+  private int durability;
 
-  public Weapon(String name, int value, double weight, int damagePoints, int durability) {
+  public Weapon(String name, int value, double weight, int damagePoints) {
     super(name, value, weight);
     this.damagePoints = damagePoints;
-    this.durability = durability;
+    this.durability = MAX_DURABILITY;
   }
 
   public int getDamagePoints() {
