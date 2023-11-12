@@ -1,8 +1,12 @@
 import item.Item;
 import item.Weapon;
 import item.armor.Armor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Inventory {
+
+  private static final Logger logger = LoggerFactory.getLogger(Inventory.class);
 
   Storage storage = new Storage();
   Equipment equipment = new Equipment();
@@ -16,7 +20,7 @@ public class Inventory {
 
     boolean success = false;
 
-    if (storage.getItems().contains(item)) {
+    if (Storage.getItems().contains(item)) {
       success = storage.removeItem(item);
     } else if (equipment.getItems().contains(item)) {
       success = equipment.takeOffItem(item);
@@ -24,15 +28,15 @@ public class Inventory {
 
     if (success) {
       storage.addMoney(item.getValue());
-      System.out.println(item.getName() + " has been sold for " + item.getValue() + " coins.");
-    } else System.out.println("Unable to sell" + item.getName());
+      logger.info(item.getName() + " has been sold for " + item.getValue() + " coins.");
+    } else logger.error("Unable to sell" + item.getName());
   }
 
   // TODO: use takeOff in method
   public void wearItem(Item newItem) {
 
     // TODO Static member 'models.Storage.getItems()' accessed via instance reference
-    if (storage.getItems().contains(newItem)) {
+    if (Storage.getItems().contains(newItem)) {
 
       // only armor and weapon can be worn
       if (newItem instanceof Armor || newItem instanceof Weapon) {
@@ -41,24 +45,28 @@ public class Inventory {
           if (oldItem != null) storage.addItem(oldItem);
         }
       } else
-        System.out.println(
+        logger.error(
             "Invalid type of item: "
                 + newItem.getName()
                 + " ("
                 + newItem.getClass().getSimpleName()
                 + ")");
     } else {
-      System.out.println(newItem.getName() + " not found in storage.");
+      logger.error(newItem.getName() + " not found in storage.");
     }
   }
 
   public void takeOffItem(Item item) {
     if (equipment.getItems().contains(item)) {
       if (equipment.takeOffItem(item)) addToStorage(item);
-    } else System.out.println(item.getName() + " not found in inventory");
+    } else logger.error(item.getName() + " not found in inventory");
   }
 
   public void addToStorage(Item item) {
     storage.addItem(item);
+  }
+
+  public void removeFromStorage(Item item) {
+    storage.removeItem(item);
   }
 }

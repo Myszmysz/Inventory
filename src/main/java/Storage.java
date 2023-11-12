@@ -3,34 +3,41 @@ import item.Item;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+// TODO czy storage nie powinno być interface?
+// TODO: zrobić metody ze storage możliwe do wywołania tylko z inventory
 public class Storage {
 
+  private static final Logger logger = LoggerFactory.getLogger(Storage.class);
+
   private static final List<Item> items = new ArrayList<>();
+
   private int money;
 
   // TODO: in new object money should always be 0;
 
   public Storage() {}
 
-  // TODO: change type to boolean
-  public static boolean removeItem(Item item) {
-    boolean result = getItems().remove(item);
-
-    System.out.println(
-        result
-            ? item.getName() + " removed from storage."
-            : "Failed to remove" + item.getName() + " from storage.");
-
-    return result;
-  }
-
   public static List<Item> getItems() {
     return items;
   }
 
-  public void addItem(Item item) {
+  protected void addItem(Item item) {
     getItems().add(item);
-    System.out.println(item.getName() + " added to inventory.");
+    Storage.logger.info(item.getName() + " added to storage.");
+  }
+
+  protected boolean removeItem(Item item) {
+    boolean result = getItems().remove(item);
+
+    // TODO: to logowanie zostawić tutaj czy wywalić wyżej?
+    if (result) {
+      Storage.logger.info(item.getName() + " removed from storage.");
+    } else Storage.logger.error(item.getName() + " not found in storage.");
+
+    return result;
   }
 
   private int getNumberOfItems() {
@@ -62,8 +69,8 @@ public class Storage {
   }
 
   /**
-   * 1 - basic info 2 - basic info with list of items 3 - basic info with extended list of item 4 -
-   * basic info with fully extended list of item
+   * 1 - basic info 2 - basic info with list of items 3 - basic info with extended list of item
+   * TODO: 4 - basic info with fully extended list of item
    */
   public String getInfo(int range) {
     StringBuilder info = new StringBuilder();
@@ -91,15 +98,7 @@ public class Storage {
           info.append("\n\n");
         }
       }
-      case 4 -> {
-        info.append(getInfo(1));
-        info.append("items:\n\n");
-
-        for (Item item : getItems()) {
-          info.append(item.getInfo());
-          info.append("\n\n");
-        }
-      }
+        // TODO: 3 should use Info.getInfo 4 should use specific object getInfo.
     }
 
     return info.toString();

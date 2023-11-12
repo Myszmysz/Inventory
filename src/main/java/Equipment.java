@@ -4,10 +4,17 @@ import item.armor.Boots;
 import item.armor.Chest;
 import item.armor.Helmet;
 import item.armor.Legs;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO czy equipment nie powinno być interface?
+// TODO: zrobić metody z equipment możliwe do wywołania tylko z inventory
 public class Equipment {
+
+  private static final Logger logger = LoggerFactory.getLogger(Equipment.class);
 
   private static Helmet helmet;
   private static Chest chest;
@@ -110,45 +117,10 @@ public class Equipment {
       oldItem = weapon;
       setWeapon((Weapon) newItem);
     } else {
-      System.out.println("Invalid item class: " + newItem.getClass().getSimpleName());
+      logger.error("Illegal class of item: " + newItem.getClass().getSimpleName());
       return null;
     }
-    System.out.println(newItem.getName() + " equipped.");
-    return oldItem;
-  }
-
-  public Item wearItem2(Item newItem) {
-
-    String itemClassName = newItem.getClass().getSimpleName();
-    Item oldItem;
-
-    switch (itemClassName) {
-      case "Helmet" -> {
-        oldItem = helmet;
-        setHelmet((Helmet) newItem);
-      }
-      case "Chest" -> {
-        oldItem = chest;
-        setChest((Chest) newItem);
-      }
-      case "Legs" -> {
-        oldItem = legs;
-        setLegs((Legs) newItem);
-      }
-      case "Boots" -> {
-        oldItem = boots;
-        setBoots((Boots) newItem);
-      }
-      case "Weapon" -> {
-        oldItem = weapon;
-        setWeapon((Weapon) newItem);
-      }
-      default -> {
-        System.out.println("Invalid item class: " + itemClassName);
-        return null;
-      }
-    }
-    System.out.println(newItem.getName() + " equipped.");
+   logger.info(newItem.getName() + " equipped.");
     return oldItem;
   }
 
@@ -163,11 +135,11 @@ public class Equipment {
       case "Boots" -> setBoots(null);
       case "Weapon" -> setWeapon(null);
       default -> {
-        System.out.println("Invalid item class name: " + itemClassName);
+        logger.error("Illegal class of item: " + item.getClass().getSimpleName());
         return false;
       }
     }
-    System.out.println(item.getName() + " taken off.");
+    logger.info(item.getName() + " taken off.");
     return true;
   }
 }

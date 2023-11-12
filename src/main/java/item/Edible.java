@@ -9,12 +9,6 @@ public class Edible extends Item {
     this.setHealthPoints(healthPoints);
   }
 
-  public void useItem() {
-    // TODO:
-    // add HP
-    // remove from inventory
-  }
-
   @Override
   public String getInfo() {
     return super.getInfo() + "\nRestores " + getHealthPoints() + " hp";
