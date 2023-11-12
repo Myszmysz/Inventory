@@ -1,8 +1,6 @@
-package models;
-
-import models.item.Item;
-import models.item.Weapon;
-import models.item.armor.Armor;
+import item.Item;
+import item.Weapon;
+import item.armor.Armor;
 
 public class Inventory {
 

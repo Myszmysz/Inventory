@@ -1,11 +1,9 @@
-package models;
-
-import models.item.Edible;
-import models.item.Weapon;
-import models.item.armor.Armor;
-import models.item.armor.Boots;
-import models.item.armor.Chest;
-import models.item.armor.Helmet;
+import item.Edible;
+import item.Weapon;
+import item.armor.Armor;
+import item.armor.Boots;
+import item.armor.Chest;
+import item.armor.Helmet;
 
 public class App {
 

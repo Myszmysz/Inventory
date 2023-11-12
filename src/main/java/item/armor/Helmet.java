@@ -1,4 +1,4 @@
-package models.item.armor;
+package item.armor;
 
 public class Helmet extends Armor{
 

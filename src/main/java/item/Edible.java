@@ -1,6 +1,4 @@
-package models.item;
-
-import models.item.Item;
+package item;
 
 public class Edible extends Item {
 

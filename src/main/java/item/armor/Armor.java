@@ -1,6 +1,7 @@
-package models.item.armor;
+package item.armor;
 
-import models.item.Item;
+
+import item.Item;
 
 public abstract class   Armor extends Item {
 

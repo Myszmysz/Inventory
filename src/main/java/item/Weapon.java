@@ -1,6 +1,4 @@
-package models.item;
-
-import java.util.EnumSet;
+package item;
 
 public class Weapon extends Item {
 
