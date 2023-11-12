@@ -1,27 +1,26 @@
 package item.armor;
 
-
 import item.Item;
 
-public abstract class   Armor extends Item {
+public abstract class Armor extends Item {
 
-    private int protectionPoints;
+  private int protectionPoints;
 
-    public Armor(String name, int value, double weight, int protectionPoints) {
-        super(name, value, weight);
-        this.setProtectionPoints(protectionPoints);
-    }
+  public Armor(String name, int value, double weight, int protectionPoints) {
+    super(name, value, weight);
+    this.setProtectionPoints(protectionPoints);
+  }
 
-    @Override
-    public String getInfo() {
-        return super.getInfo() + "\nPP: " + getProtectionPoints();
-    }
+  @Override
+  public String getInfo() {
+    return super.getInfo() + "\nPP: " + getProtectionPoints();
+  }
 
-    public int getProtectionPoints() {
-        return protectionPoints;
-    }
+  public int getProtectionPoints() {
+    return protectionPoints;
+  }
 
-    public void setProtectionPoints(int protectionPoints) {
-        this.protectionPoints = protectionPoints;
-    }
+  public void setProtectionPoints(int protectionPoints) {
+    this.protectionPoints = protectionPoints;
+  }
 }
